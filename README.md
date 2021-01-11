@@ -36,6 +36,31 @@
 - `docker build <name>` - builds an image from a Dockerfile
 
 - `docker start <name>` - start one or more containers
-- `docker stop <name>` - stop one or more containers
+- `docker stop <container_id>` - stop one or more containers
 - `docker ps <name>` - lists containers
 - `docker exec <name>` - runs a command in a running container
+- `docker images` - lists all images
+
+<br>
+
+### How does it work?
+
+![](images/docker1.jpg)
+
+- Running commands in CLI passes them into the Docker daemon (the background process) 
+    - If you need to `pull` images it will take it from the registry and download it into your docker desktop
+    - If you have the image avalable already, it will not need to download it from the registry
+
+<br>
+
+### Starting and stopping containers
+- When we `pull` any images from dockerhub, we can run them within containers
+
+- To check the images you currently have, you can `docker images`
+
+- To start a container with an image, you can `docker run -d -p <port>:<docker port> <image-name>`
+    - If you run `docker ps` you can see any running containers
+    - To stop a container you can `docker stop <id>`
+    - You can check available containers with `docker ps -a`
+    - To start a container again you can `docker start <id>`
+    - TO remove a container from the list of available containers you can `docker rm <id>`

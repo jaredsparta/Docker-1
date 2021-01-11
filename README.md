@@ -71,12 +71,18 @@
 - We can pull an image from the docs called `docs/docker.github.io`
 
 - We can put this in a container all in one command using `docker run -d -p 4000:4000 docs/docker.github.io`
-    - If we wanted to map the container onto `localhost:5000`, for example, we would need to run `docker run -d -p 5000:4000 docs/docker.github.io`
-    - If we wanted to map port 4000 of the container (this is where the docs are hosted ON THE CONTAINER to any other port on our localhost, we can specify it to 
-    - From the docs [here](https://docs.docker.com/engine/reference/commandline/run/#publish-or-expose-port--p---expose)
+
+<br>
+
+### Mapping container ports 
+
+- We can map docker ports to different localhost ports through specifying the `-p` option when using `docker run`
+    - For instance, if we wanted to run the `nginx` image on port 4000 (i.e. `localhost:4000`), we would run the command `docker run -d -p 4000:80 nginx`
+    - This would map the port 80 from the container (where nginx runs by default) to port 4000 on localhost
+- From the docs [here](https://docs.docker.com/engine/reference/commandline/run#publish-or-expose-port--p---expose)
 
 <br>
 
 ### Copying files from local machine into a container
-- Make use of `docker cp <path-to-file-on-local=machine> <container-id-or-name>:<path-on-container>`
+- Make use of `docker cp <path-to-file-on-local-machine> <container-id-or-name>:<path-on-container>`
 

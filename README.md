@@ -1,1 +1,41 @@
 # Docker
+
+### What is Docker?
+- It's an open source platform for containerization
+- Docker enables you to separate your applications from your infrastructure so you can deliver software quickly
+- You run applications in loosely isolated environments called `containers`
+
+<br>
+
+### Why docker?
+- Multi-billion dollar companies are using Docker every day
+- Docker adoption is predicted to have been 50% at the end of 2020 
+
+<br>
+
+### What's the difference between a VM and a container?
+
+![](images/vmcontainers.jpg)
+
+- Docker is more light weight and only shares the resources of an OS rather than using the OS completely
+
+- As they are isolated, one can run many containers simultaneously on a given host. Containers are lightweight as they don't require the extra load of a hypervisor but also runs directly in the kernel.
+    - You can run more containers in a given machine than you can VMs
+
+- What is a hypervisor?
+    - A hypervisor, also known as a virtual machine monitor or VMM, is software that creates and runs virtual machines (VMs). A hypervisor allows one host computer to support multiple guest VMs by virtually sharing its resources, such as memory and processing. 
+
+<br>
+
+### Main commands
+- Refer to the documentation [here](https://docs.docker.com/engine/reference/commandline/docker/)
+
+- `docker pull <name>` - will pull an image or repo from the registry
+- `docker run <name>` - run a command in a new container
+- `docker commit <name>` - creates a new image from a container's changes
+- `docker build <name>` - builds an image from a Dockerfile
+
+- `docker start <name>` - start one or more containers
+- `docker stop <name>` - stop one or more containers
+- `docker ps <name>` - lists containers
+- `docker exec <name>` - runs a command in a running container

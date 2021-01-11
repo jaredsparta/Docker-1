@@ -64,3 +64,19 @@
     - You can check available containers with `docker ps -a`
     - To start a container again you can `docker start <id>`
     - TO remove a container from the list of available containers you can `docker rm <id>`
+
+<br>
+
+### Making docker docs available on our localhost
+- We can pull an image from the docs called `docs/docker.github.io`
+
+- We can put this in a container all in one command using `docker run -d -p 4000:4000 docs/docker.github.io`
+    - If we wanted to map the container onto `localhost:5000`, for example, we would need to run `docker run -d -p 5000:4000 docs/docker.github.io`
+    - If we wanted to map port 4000 of the container (this is where the docs are hosted ON THE CONTAINER to any other port on our localhost, we can specify it to 
+    - From the docs [here](https://docs.docker.com/engine/reference/commandline/run/#publish-or-expose-port--p---expose)
+
+<br>
+
+### Copying files from local machine into a container
+- Make use of `docker cp <path-to-file-on-local=machine> <container-id-or-name>:<path-on-container>`
+

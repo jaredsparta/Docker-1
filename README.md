@@ -79,10 +79,22 @@
 - We can map docker ports to different localhost ports through specifying the `-p` option when using `docker run`
     - For instance, if we wanted to run the `nginx` image on port 4000 (i.e. `localhost:4000`), we would run the command `docker run -d -p 4000:80 nginx`
     - This would map the port 80 from the container (where nginx runs by default) to port 4000 on localhost
-- From the docs [here](https://docs.docker.com/engine/reference/commandline/run#publish-or-expose-port--p---expose)
+- Documentation for `docker run -p` is [here](https://docs.docker.com/engine/reference/commandline/run#publish-or-expose-port--p---expose)
+
+<br>
+
+### Entering a container
+- We can enter a container through `docker exec` and run commands in the container using this
+
+- If we wanted to run commands inside the actual container (similar to SSH) we can specify the `-i` option (`i` for "interactive", which keeps STDIN open even if not attached)
+    - Further, we can allocate a pseudo-TTY with the `-t` option
+    - So finally, `docker exec -it <container_id> bash` will allow us to enter the container and run commands there
+
+- Documentation for `docker exec` is [here](https://docs.docker.com/engine/reference/commandline/exec/)
 
 <br>
 
 ### Copying files from local machine into a container
 - Make use of `docker cp <path-to-file-on-local-machine> <container-id-or-name>:<path-on-container>`
 
+- So if we wanted to copy a file named `index.html` in the current directory to the nginx default directory, one would use `docker cp index.html <container_id>:/usr/share/nginx/html/`

@@ -135,3 +135,48 @@
 
 - We can pipe the logs into a `.txt` file using `docker logs <name> >> logs.txt`
     - This places the logs in a file called `logs.txt`
+
+<br>
+
+### Building docker images
+- To create a docker image we need to create a `Dockerfile`
+    - It is case-sensitive and has no extension
+
+- Creating images in this way is more helpful than running containers and executing commands inside them
+    - This is an automated way to do so
+
+- What gets put in the `Dockerfile` depends wholly on what the image is going to be doing in a container 
+
+- Best practices for building Dockerfiles found [here](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/)
+
+<br>
+
+### Writing the `Dockerfile`
+- `FROM` is used to tell docker which base image to use to build the image
+- `LABEL MAINTAINER=jsolano@spartaglobal.com` tell others who maintains the image
+- `COPY <path-on-localhost> <path-on-image>`
+- `EXPOSE` for the default port
+- `CMD` 
+
+<br>
+
+### Dockerising the node.js app
+- As always, we return to our node js app. We eventually want to move to a microservices architecture so it is important we know how to containerise apps
+
+- How did we write it's `Dockerfile`?
+    - Node documentation [here](https://nodejs.org/en/docs/guides/nodejs-docker-webapp/)
+    - Bare in mind that the Dockerfile for the app is found in the `app` directory
+    ```docker
+    FROM node
+    WORKDIR /usr/src/app
+    COPY . .
+    RUN npm install
+    EXPOSE 3000
+    CMD ["node","app.js"]
+    ```
+    - We want to use the `node` base image: `FROM node`
+    - We want to switch directories to where we will place our app files: `WORKDIR /usr/src/app`
+    - We copy over the app files into this directory: `COPY . .`
+    - We must install the app dependencies: `RUN npm install`
+    - We run the app on port 3000 in containers: `EXPOSE 3000`
+    - We specify that the app runs in the container: `CMD ["node", "app.js"]`

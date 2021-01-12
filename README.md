@@ -98,3 +98,19 @@
 - Make use of `docker cp <path-to-file-on-local-machine> <container-id-or-name>:<path-on-container>`
 
 - So if we wanted to copy a file named `index.html` in the current directory to the nginx default directory, one would use `docker cp index.html <container_id>:/usr/share/nginx/html/`
+
+<br>
+
+### Putting images onto DockerHub
+- When we have a container up and running, we can configure it to whatever we like
+    - We used the base `nginx` image from DockerHub and input our own `index.html` file on the default page
+    - This container can now be made into a new image and pushed onto DockerHub
+
+- We first have to create a new image of the container:
+    - Use `docker commit <container_id_or_name> <username_on_dockerhub>/<repo_name>:<tag>`
+    - In my case: `docker commit <container_name> jaredsparta/image-1:latest`
+
+- If one runs `docker images`, the image of the container will now be in the list. All we now need to do is push it to DockerHub:
+    - Use `docker push <repo_name>`
+    - In my case, `docker push jaredsparta/image-1`
+    

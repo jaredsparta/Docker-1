@@ -30,16 +30,30 @@
 ### Main commands
 - Refer to the documentation [here](https://docs.docker.com/engine/reference/commandline/docker/)
 
-- `docker pull <name>` - will pull an image or repo from the registry
-- `docker run <name>` - run a command in a new container
-- `docker commit <name>` - creates a new image from a container's changes
-- `docker build <name>` - builds an image from a Dockerfile
+- Mostly, `<name>` and `<id>` are interchangeable
 
-- `docker start <name>` - start one or more containers
-- `docker stop <container_id>` - stop one or more containers
-- `docker ps <name>` - lists containers
-- `docker exec <name>` - runs a command in a running container
 - `docker images` - lists all images
+- `docker ps <name>` - lists containers (add `-a` to list all available containers)
+
+<br>
+
+- `docker run <name>` - run an image, either from registry or local files
+- `docker build <name>` - builds an image from a Dockerfile
+- `docker start <name>` - start one or more containers
+- `docker stop <name>` - stop one or more containers
+- `docker exec <name>` - runs a command in a running container
+
+<br>
+
+- `docker rmi` - removes images
+- `docker rm` - removes containers
+- `docker logs <name>` - fetches logs of the container
+
+<br>
+
+- `docker commit <name>` - creates a new image from a container
+- `docker push <name>` - pushes an image onto Docker Hub
+- `docker pull <name>` - will pull an image or repo from the registry
 
 <br>
 
@@ -114,3 +128,10 @@
     - Use `docker push <repo_name>`
     - In my case, `docker push jaredsparta/image-1`
     
+<br>
+
+### Getting logs from a docker container
+- We can retrieve logs from a container using `docker logs <name>`
+
+- We can pipe the logs into a `.txt` file using `docker logs <name> >> logs.txt`
+    - This places the logs in a file called `logs.txt`

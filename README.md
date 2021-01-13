@@ -180,3 +180,37 @@
     - We must install the app dependencies: `RUN npm install`
     - We run the app on port 3000 in containers: `EXPOSE 3000`
     - We specify that the app runs in the container: `CMD ["node", "app.js"]`
+
+<br>
+
+### Microservices vs. Monolith
+![](images/monolithic-vs-microservices.png)
+
+<br>
+
+- Monolithic architecture:
+    - Why:
+        - Easier debugging and testing
+        - Very simply to deploy as it is just a single service
+        - Simple to develop
+        
+    - Why not:
+        - Whenever changes need to be pushed, one would need to restart the entire structure. This results in potential downtime whenever new versions are made.
+        - Hard to scale up as one would need to scale the entire structure
+        - Hard to apply new technologies within this setup
+
+<br>
+
+- A microservce architecture:
+    - Why:
+        - Ideal for large-scale projects
+        - Loosely coupled so there are less breaking points
+        - Independently deployable
+        - The services are organised around business capabilities which gives way to easier to applications that are easy to understand
+        - Highly maintainable and testable
+        - Easy to implement new technologies
+
+    - Why not:
+        - Added complexity which may confuse smaller, less experienced teams
+        - Testing is harder than for monolithic
+        - A carefully crafted distribution system is required as there would be many moving parts

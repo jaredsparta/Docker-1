@@ -214,3 +214,55 @@
         - Added complexity which may confuse smaller, less experienced teams
         - Testing is harder than for monolithic
         - A carefully crafted distribution system is required as there would be many moving parts
+
+<br>
+
+### Multi-stage builds
+
+- The following `Dockerfile` creates an image that is around `976 mb`
+
+```docker
+FROM node
+WORKDIR /usr/src/app
+COPY . .
+RUN npm install
+EXPOSE 3000
+CMD ["node","app.js"]
+```
+
+- The following `Dockerfile` will significantly reduce the image size. Adding the second stage as shown will reduce the size to only `136 mb`
+- Why would we do it this way and not just use `node:alpine` immediately?
+    - Different base images have different functionalities, the original `node` image has all the necessary functionalities for most apps, and when we add the extra layer we take those necessary dependencies and put them into the `node:alpine` image. This will reduce the entire size of the image.
+    - Of course if the app could run immediately with `node:alpine`, then you could just use alpine initially 
+
+```docker
+FROM node as APP
+WORKDIR /usr/src/app
+COPY . .
+RUN npm install
+
+
+# Building a multi-stage layer
+# This second FROM block represents a new stage of the build
+# This is the reason why there is an extra WORKDIR -- we are in another env and need to change directory there too
+FROM node:alpine
+COPY --from=app /usr/src/app /usr/src/app
+WORKDIR /usr/src/app
+EXPOSE 3000
+CMD ["node", "app.js"]
+```
+
+<br>
+
+### S3 Bucket and CloudWatch
+- It stands for "simple storage service" -- a data storage service on AWS
+    - Think of it simply as a hard-drive on AWS
+
+- S3 buckets are available globally
+
+- There are a couple of services within S3:
+    - Example: 
+        - Netflix has a new movie out and everyone will want to view it, so we put it in S3
+        - After a few months, you can place it into `S3 Glacier`
+
+- S3 is used with CloudWatch to ensure there is a disaster recovery plan
